@@ -19,5 +19,13 @@ RSpec.describe 'BulkDiscount New' do
       expect(page).to have_content(0.5)
       expect(page).to have_content(20)
     end
+
+    xit 'can send back flash messafes for incomplete' do
+      fill_in :discount, with: 0.5
+
+      click_on 'Submit'
+
+      expect(page).to have_content('Discount not created: Required info missing')
+    end
   end
 end

@@ -19,8 +19,9 @@ class Merchant::BulkDiscountsController < ApplicationController
     if discount.save
       redirect_to merchant_bulk_discounts_path(merchant)
     flash[:notice] = 'New Discount Created'
-    else
-      flash[:notice] = 'Discount not created: Required info missing'
+  #   else
+  #     render :new
+  #     flash[:notice] = 'Discount not created: Required info missing'
     end  
   end
 
