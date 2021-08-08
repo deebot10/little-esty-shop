@@ -2,7 +2,7 @@
 
 <% @discounts.each do |discount| %>
   <section id=<%="discount-#{discount.id}"%>>
-    <p>Discount id: <%=discount.id%></p>
+    <p><%= link_to "#{discount.id}", bulk_discount_path(discount.id) %></p>
     <p>Percentage: <%= discount.discount%></p>
     <p>Quantity Threshold: <%= discount.quantity_threshold%></p>
   </section>
