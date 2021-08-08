@@ -1,0 +1,9 @@
+<h1>Bulk Discounts Index</h1>
+
+<section id='holidays'>
+  <h1>Upcoming Holidays</h1>
+  <% @holidays.each do |holiday| %>
+    <p>Holiday Name: <%= holiday.name%></p>
+    <p>Date: <%= holiday.date %></p>
+  <%end%>
+</section>
