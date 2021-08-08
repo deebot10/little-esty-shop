@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :items
     resources :invoices
     resources :invoice_items, only: [:update]
-    resources :bulk_discounts, only: [:index, :show, :new, :show]
+    resources :bulk_discounts, only: [:index, :show, :new, :create]
   end
 
   resources :admin, only: [:index]
@@ -18,6 +18,4 @@ Rails.application.routes.draw do
     resources :merchants
     resources :invoices
   end
-
-  # resources :bulk_discounts, only: [:index, :show, :new, :show]
 end
