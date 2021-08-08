@@ -12,16 +12,6 @@ RSpec.describe 'BulkDiscount Index Page' do
   end  
 
   describe 'Merchant Bulk Discounts Index' do
-    #     Merchant Bulk Discounts Index
-
-    # As a merchant
-    # When I visit my merchant dashboard
-    # Then I see a link to view all my discounts
-    # When I click this link
-    # Then I am taken to my bulk discounts index page
-    # Where I see all of my bulk discounts including their
-    # percentage discount and quantity thresholds
-    # And each bulk discount listed includes a link to its show page
     it 'displays each bulk discount as well as ther percentage' do
       within("#discount-#{@bd_10.id}") do
         expect(page).to have_link(@bd_10.id)
