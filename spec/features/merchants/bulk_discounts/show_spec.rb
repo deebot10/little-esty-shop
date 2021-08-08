@@ -5,10 +5,10 @@ RSpec.describe 'BulkDiscount Show Page' do
     @merchant = create(:merchant)
     @bd_50 = create(:bulk_discount, discount: 0.5 ,quantity_threshold: 10, merchant_id: @merchant.id)
 
-    visit bulk_discount_path(@bd_50)
+    visit merchant_bulk_discount_path(@merchant, @bd_50)
   end
 
-  describe 'Story5' do
+  describe 'Merchant Bulk Discount Show' do
     it 'displays the discount and attributes' do
       expect(page).to have_content(@bd_50.discount)
       expect(page).to have_content(@bd_50.quantity_threshold)

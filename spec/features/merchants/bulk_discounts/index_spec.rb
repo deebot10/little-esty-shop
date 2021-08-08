@@ -8,7 +8,7 @@ RSpec.describe 'BulkDiscount Index Page' do
     @bd_25 = create(:bulk_discount, discount: 0.25, quantity_threshold: 10, merchant_id: @merchant.id)
     @bd_50 = create(:bulk_discount, discount: 0.5 ,quantity_threshold: 10, merchant_id: @merchant.id)
     
-    visit bulk_discounts_path
+    visit merchant_bulk_discounts_path(@merchant)
   end  
 
   describe 'Merchant Bulk Discounts Index' do
@@ -46,6 +46,24 @@ RSpec.describe 'BulkDiscount Index Page' do
         expect(page).to have_content('Holiday Name: Veterans Day')
         expect(page).to have_content('Date: 2021-11-11')
       end
+    end
+  end
+
+  describe 'Merchant Bulk Discount Create' do
+    #     As a merchant
+    # When I visit my bulk discounts index
+    # Then I see a link to create a new discount
+    # When I click this link
+    # Then I am taken to a new page where I see a form to add a new bulk discount
+    # When I fill in the form with valid data
+    # Then I am redirected back to the bulk discount index
+    # And I see my new bulk discount listed
+    it 'can create a new discount' do
+      expect(page).to have_link('Create a Discount')
+
+      click_link 'Create a Discount'
+
+      expect(current_path).to eq(new_merchant_bulk_discount_path(@merchant))
     end
   end
 end

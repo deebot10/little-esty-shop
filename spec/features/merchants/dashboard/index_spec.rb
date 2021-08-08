@@ -100,7 +100,7 @@ RSpec.describe 'Merchants dashboard index page' do
 
       click_on 'View Discounts'
 
-      expect(current_path).to eq(bulk_discounts_path)
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
     end
   end
 end
