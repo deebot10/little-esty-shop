@@ -1,5 +1,13 @@
 <h1>Bulk Discounts Index</h1>
 
+<% @discounts.each do |discount| %>
+  <section id=<%="discount-#{discount.id}"%>>
+    <p>Discount id: <%=discount.id%></p>
+    <p>Percentage: <%= discount.discount%></p>
+    <p>Quantity Threshold: <%= discount.quantity_threshold%></p>
+  </section>
+<%end%>
+
 <section id='holidays'>
   <h1>Upcoming Holidays</h1>
   <% @holidays.each do |holiday| %>
