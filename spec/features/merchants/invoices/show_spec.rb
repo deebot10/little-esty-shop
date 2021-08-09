@@ -57,4 +57,28 @@ RSpec.describe 'Merchants invoices show page' do
       expect(current_path).to eq("/merchants/#{@merchant_1.id}/invoices/#{@invoices[0].id}")
     end
   end
+
+  describe 'Merchant Invoice Show Page: Total Revenue and Discounted Revenue' do
+    #     As a merchant
+    # When I visit my merchant invoice show page
+    # Then I see the total revenue for my merchant from this invoice (not including discounts)
+    # And I see the total discounted revenue for my merchant from this invoice which includes bulk discounts in the calculation
+    it 'can dsicount total revenue' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      
+      bd_50 = create(:bulk_discount, discount: 0.5 ,quantity_threshold: 10, merchant_id: merchant.id)
+      item = create(:item, merchant_id: merchant.id)   
+  
+      invoice = create(:invoice, customer_id: customer.id)
+  
+      invoice_item = create(:invoice_item, item_id: item.id, invoice_id: invoice.id, status: 0)
+  
+      transaction = create(:transaction, invoice_id: invoice.id)
+
+      visit merchant_invoice_path(merchant, invoice)
+
+      expect(page).to have_content("Total Discounted Revenue: ")
+    end
+  end
 end
