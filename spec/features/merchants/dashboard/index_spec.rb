@@ -88,4 +88,19 @@ RSpec.describe 'Merchants dashboard index page' do
       end
     end
   end
+
+  describe 'Merchant Bulk Discounts Index' do
+    before(:each) do
+      @merchant_1 = create(:merchant)
+      visit "/merchants/#{@merchant_1.id}/dashboard"
+    end
+
+    it 'has a link to view all discounts' do
+      expect(page).to have_link('View Discounts') 
+
+      click_on 'View Discounts'
+
+      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant_1))
+    end
+  end
 end
