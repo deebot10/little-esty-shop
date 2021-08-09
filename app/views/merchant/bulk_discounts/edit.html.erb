@@ -1,0 +1,11 @@
+<h1>Edit Merchant</h1>
+  
+<%= form_with url: merchant_bulk_discount_path(@merchant, @discount), method: :patch, local: true do |f| %>
+  <%= f.label :discount %>
+  <%= f.text_field :discount %>
+  
+  <%= f.label :quantity_threshold %>
+  <%= f.number_field :quantity_threshold %>
+  
+  <%= f.submit 'Submit' %> 
+<%end%>
