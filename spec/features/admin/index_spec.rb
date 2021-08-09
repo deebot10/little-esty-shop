@@ -121,12 +121,6 @@ RSpec.describe 'Admin Index' do
   end
 
   describe 'Admin Dashboard Invoices sorted by least recent' do
-    # As an admin,
-    # When I visit the admin dashboard
-    # In the section for "Incomplete Invoices",
-    # Next to each invoice id I see the date that the invoice was created
-    # And I see the date formatted like "Monday, July 18, 2019"
-    # And I see that the list is ordered from oldest to newest
 
     it 'has the date for invocies created at' do
 
