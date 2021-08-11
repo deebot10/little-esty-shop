@@ -12,4 +12,9 @@ class InvoiceItem < ApplicationRecord
   def self.total_revenue
     (sum("invoice_items.unit_price * invoice_items.quantity").to_f)/100
   end
+
+  def discount
+    bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', quantity)
+                  .order(discount: :desc).first  
+  end
 end

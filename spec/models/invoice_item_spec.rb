@@ -39,5 +39,30 @@ RSpec.describe InvoiceItem do
       end
     end
   end
+
+  describe 'instance methods' do
+    it 'can return a discount that qualifys' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      
+      bd_50 = create(:bulk_discount, discount: 0.5, quantity_threshold: 10, merchant_id: merchant.id)
+      bd_25 = create(:bulk_discount, discount: 0.25, quantity_threshold: 5, merchant_id: merchant.id)
+
+      item_1 = create(:item, merchant_id: merchant.id, unit_price: 5)   
+      item_2 = create(:item, merchant_id: merchant.id, unit_price: 8)   
+
+      invoice_1 = create(:invoice, customer_id: customer.id)
+      invoice_2 = create(:invoice, customer_id: customer.id)
+         
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 11, unit_price: 500, status: 0)
+      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, quantity: 6, unit_price: 800, status: 0)
+      invoice_item_3 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id, quantity: 6, unit_price: 800, status: 0)
+
+      transaction_1 = create(:transaction, invoice_id: invoice_1.id)
+      transaction_2 = create(:transaction, invoice_id: invoice_2.id)
+
+      expect(invoice_item_1.discount).to eq(bd_50)
+    end
+  end
 end
 

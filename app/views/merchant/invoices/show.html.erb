@@ -28,9 +28,11 @@ Date: <%= @invoice.created_at.strftime('%A %B %e, %Y') %>
         <%= f.submit 'Update Item Status' %>
       <% end %>
      
-      <%# <% if invoice_item.merchant.bulk_discounts.present?%>
-          
-      <%# <%end%> %> %>
+     <% if !invoice_item.discount.nil? %>
+       <section id=<%="discount-#{invoice_item.id}"%>>
+         <%= link_to "Discount", merchant_bulk_discount_path(@merchant, invoice_item.discount.id) %>
+       </section>
+     <%end%>
       </td>
       </tr>
   <% end %>
