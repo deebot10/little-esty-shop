@@ -75,7 +75,32 @@ RSpec.describe 'Admin Invoice Show Page' do
   end
 
   describe 'Admin Invoice Show Page: Total Revenue and Discounted Revenue' do
-    it 'can show discounted' do
+    it 'can show discounted in the admin page' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      
+      bd_50 = create(:bulk_discount, discount: 0.5, quantity_threshold: 10, merchant_id: merchant.id)
+      bd_25 = create(:bulk_discount, discount: 0.25, quantity_threshold: 5, merchant_id: merchant.id)
+
+      item_1 = create(:item, merchant_id: merchant.id, unit_price: 5)   
+      item_2 = create(:item, merchant_id: merchant.id, unit_price: 8)   
+
+      invoice_1 = create(:invoice, customer_id: customer.id)
+      invoice_2 = create(:invoice, customer_id: customer.id)
+         
+      invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice_1.id, quantity: 11, unit_price: 500, status: 0)
+      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_1.id, quantity: 6, unit_price: 800, status: 0)
+      invoice_item_3 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id, quantity: 6, unit_price: 800, status: 0)
+
+      transaction_1 = create(:transaction, invoice_id: invoice_1.id)
+      transaction_2 = create(:transaction, invoice_id: invoice_2.id)
+
+      visit admin_invoice_path(invoice_1.id)
+      
+      within('#totalrev') do
+        expect(page).to have_content('Total Revenue: $103.00')
+        # expect(page).to have_content("Total Discounted Revenue: $63.50")
+      end
     end
   end
 end
