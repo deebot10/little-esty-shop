@@ -55,8 +55,11 @@ RSpec.describe Invoice do
 
   describe 'instance methods' do
     it '::total_revenue' do
+      expect(@invoice7.total_revenue).to eq(1.0)
+    end
 
-      expect(@invoice7.total_revenue).to eq(100)
+    it '::total_discount' do
+      expect(@invoice7.total_discount).to eq(1.0)
     end
   end
 end

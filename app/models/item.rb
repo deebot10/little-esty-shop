@@ -35,4 +35,13 @@ class Item < ApplicationRecord
     .pluck("invoices.created_at")
     .first
   end
+
+  def method_name
+    invoice_items.total_revenue
+  end
+
+   def discount_applied?
+    require 'pry'; binding.pry 
+    merchant.bulk_discounts.present?
+  end
 end

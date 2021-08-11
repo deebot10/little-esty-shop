@@ -1,5 +1,7 @@
 <h1> Invoice #<%= @invoice.id %> </h1>
-<h3>Total Revenue: <%= number_to_currency(@invoice_items.total_revenue.to_f/100) %></h3>
+
+<h3>Total Revenue: <%= number_to_currency(@invoice.total_revenue) %></h3>
+<h3>Total Discounted Revenue: <%= number_to_currency(@invoice.total_discount) %> </h3>
 
 <b>For Customer: </b>
 <h2><%= @customer.first_name %> <%= @customer.last_name %></h2>
@@ -25,6 +27,12 @@ Date: <%= @invoice.created_at.strftime('%A %B %e, %Y') %>
         <%= f.hidden_field :id_for_merchant, :value => @merchant.id %>
         <%= f.submit 'Update Item Status' %>
       <% end %>
+     
+     <% if !invoice_item.discount.nil? %>
+       <section id=<%="discount-#{invoice_item.id}"%>>
+         <%= link_to "Discount", merchant_bulk_discount_path(@merchant, invoice_item.discount.id) %>
+       </section>
+     <%end%>
       </td>
       </tr>
   <% end %>
