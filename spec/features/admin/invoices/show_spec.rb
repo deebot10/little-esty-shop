@@ -99,7 +99,7 @@ RSpec.describe 'Admin Invoice Show Page' do
       
       within('#totalrev') do
         expect(page).to have_content('Total Revenue: $103.00')
-        # expect(page).to have_content("Total Discounted Revenue: $63.50")
+        expect(page).to have_content("Total Discounted Revenue: $63.50")
       end
     end
   end
