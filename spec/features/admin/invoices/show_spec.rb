@@ -54,8 +54,7 @@ RSpec.describe 'Admin Invoice Show Page' do
     it 'displays the total revenue' do
 
       within('#totalrev') do
-
-        expect(page).to have_content("Total Revenue: $#{(@invoice.total_revenue.to_f / 100)}")
+        expect(page).to have_content("Total Revenue: $#{(@invoice.total_revenue)}")
       end
     end
   end
@@ -72,6 +71,11 @@ RSpec.describe 'Admin Invoice Show Page' do
 
       click_on "Submit"
       expect(page).to have_content('Invoice Status: completed')
+    end
+  end
+
+  describe 'Admin Invoice Show Page: Total Revenue and Discounted Revenue' do
+    it 'can show discounted' do
     end
   end
 end
