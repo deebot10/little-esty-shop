@@ -110,6 +110,7 @@ RSpec.describe 'Merchants invoices show page' do
       visit merchant_invoice_path(merchant, invoice_1)
 
       within("#discount-#{invoice_item_1.id}") do
+        save_and_open_page
         expect(page).to have_link('Discount')
         click_link 'Discount'
         expect(current_path).to eq(merchant_bulk_discount_path(merchant, bd_50))

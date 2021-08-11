@@ -15,6 +15,12 @@ class InvoiceItem < ApplicationRecord
 
   def discount
     bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', quantity)
+                  .size >= 1
+                  # .order(discount: :desc).first  
+  end
+
+  def find_discount
+    bulk_discounts.where('bulk_discounts.quantity_threshold <= ?', quantity)
                   .order(discount: :desc).first  
   end
 end
