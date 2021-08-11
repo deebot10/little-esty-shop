@@ -20,19 +20,19 @@ class Invoice < ApplicationRecord
     invoice_items.sum('quantity * unit_price').to_f / 100  
   end
 
-  def total_discount(merchant)
-    unless merchant.bulk_discounts.empty?
-      discount = 0
-      invoice_items.each do |it|
-        discount += merchant.bulk_discounts
-        .where('quantity_threshold <= ?', it.quantity)
-        .order('quantity_threshold desc').first.discount * ((it.quantity * it.unit_price).to_f / 100)
-      end
-      total_revenue - discount
-    else 
-      total_revenue
-    end 
-  end
+  # def total_discount(merchant)
+  #   unless merchant.bulk_discounts.empty?
+  #     discount = 0
+  #     invoice_items.each do |it|
+  #       discount += merchant.bulk_discounts
+  #       .where('quantity_threshold <= ?', it.quantity)
+  #       .order('quantity_threshold desc').first.discount * ((it.quantity * it.unit_price).to_f / 100)
+  #     end
+  #     total_revenue - discount
+  #   else 
+  #     total_revenue
+  #   end 
+  # end
 
   def total_discount
     x = invoice_items.joins(:bulk_discounts)

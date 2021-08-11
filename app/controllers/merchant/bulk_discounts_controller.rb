@@ -6,7 +6,6 @@ class Merchant::BulkDiscountsController < ApplicationController
   end
 
   def show
-    # require 'pry'; binding.pry
     @merchant = Merchant.find(params[:merchant_id])
     @discount = BulkDiscount.find(params[:id])
   end
@@ -22,9 +21,6 @@ class Merchant::BulkDiscountsController < ApplicationController
       redirect_to merchant_bulk_discounts_path(merchant)
       flash[:notice] = 'New Discount Created'
     end  
-  #   else
-  #     render :new
-  #     flash[:notice] = 'Discount not created: Required info missing'
   end
 
   def edit
@@ -39,9 +35,6 @@ class Merchant::BulkDiscountsController < ApplicationController
     redirect_to merchant_bulk_discount_path(merchant, discount)
     flash[:notice] = 'Discount Updated'
   end
-
-  # def update
-  # end
 
   def destroy
     merchant = Merchant.find(params[:merchant_id])
